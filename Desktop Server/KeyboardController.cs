@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 //STEP 1
 using WindowsInput;
 
@@ -151,52 +152,7 @@ namespace Desktop_Server
 
         }
 
-        public static void ProcessShortCuts(string text)
-        {
-            if (text == "chrome-lasttab")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(new[]{VirtualKeyCode.CONTROL,VirtualKeyCode.SHIFT}, new[] { VirtualKeyCode.VK_T });
-            }
-            else if (text == "chrome-savepage")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.CONTROL, new[] { VirtualKeyCode.VK_S});               
-            }
-            else if (text == "chrome-incognito")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.VK_N });
-            }
-            else if (text == "chrome-viewbook")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(new[]{VirtualKeyCode.CONTROL,VirtualKeyCode.SHIFT}, new[] { VirtualKeyCode.VK_B });
-            }
-            else if (text == "chrome-viewbookman")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(new[]{VirtualKeyCode.CONTROL,VirtualKeyCode.SHIFT}, new[] {  VirtualKeyCode.VK_O });
-            }
-            else if (text == "chrome-viewhist")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.CONTROL, new[] { VirtualKeyCode.VK_H});
-            }
-            else if (text == "chrome-dls")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.CONTROL, new[] { VirtualKeyCode.VK_J });
-            }
-            else if (text == "chrome-cleard")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.DELETE });
-            }
-            else if (text == "chrome-devt")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(new[]{VirtualKeyCode.CONTROL,VirtualKeyCode.SHIFT}, new[] {  VirtualKeyCode.VK_J });
-            }
-
-            else if (text == "chrome-feedback")
-            {
-                InputSimulator.SimulateModifiedKeyStroke(new[]{VirtualKeyCode.MENU,VirtualKeyCode.SHIFT}, new[] { VirtualKeyCode.VK_I });
-            }
-
-            //
-        }
+  
 
         public static void simulateButton(VirtualKeyCode key, String action)
         {
@@ -210,5 +166,142 @@ namespace Desktop_Server
                 InputSimulator.SimulateKeyUp(key);                
             }
         }
+
+
+        public static void simulateButtonPress(string key)
+        {
+           InputSimulator.SimulateTextEntry(key);
+        }
+        
+
+        // EXPERIMENTAL
+        //Only For Keys 
+        public static void processGlobeAction(string action)
+        {
+            if(action.ToLower() == "g".ToLower())
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_G);
+            }
+            else if (action == "m".ToLower())
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_M);
+            }
+
+            else if (action == "l".ToLower())
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_L);
+            }
+
+            else if (action == "j".ToLower())
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_J);
+            }
+
+            else if (action == "zoom in".ToLower())
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_I);
+            }
+
+
+            else if (action == "zoom out".ToLower())
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_K);
+            }
+
+            else if (action == "capture".ToLower())
+            {
+                Console.WriteLine("We are Capturing");
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_P);
+            }
+
+            else if (action == "remove".ToLower())
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_R);
+            }
+
+            else if(action.ToLower() == "germany")
+            {
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_Q);
+                
+                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.LSHIFT, new[] { VirtualKeyCode.VK_3 });
+                Thread.Sleep(100);
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_G);
+                Thread.Sleep(100);
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_E);
+                Thread.Sleep(100);
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_R);
+                Thread.Sleep(100);
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_M);
+                Thread.Sleep(100);
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_A);
+                Thread.Sleep(100);
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_N);
+                Thread.Sleep(100);
+                InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_Y);
+                Thread.Sleep(100);
+                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.LSHIFT, new[] { VirtualKeyCode.VK_3 });
+                Thread.Sleep(100);
+
+                //                InputSimulator.SimulateTextEntry("q#germany#");
+            }
+
+
+
+
+        }
+
+
+
+        public static void ProcessShortCuts(string text)
+        {
+            if (text == "chrome-lasttab")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.VK_T });
+            }
+            else if (text == "chrome-savepage")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.CONTROL, new[] { VirtualKeyCode.VK_S });
+            }
+            else if (text == "chrome-incognito")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.VK_N });
+            }
+            else if (text == "chrome-viewbook")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.VK_B });
+            }
+            else if (text == "chrome-viewbookman")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.VK_O });
+            }
+            else if (text == "chrome-viewhist")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.CONTROL, new[] { VirtualKeyCode.VK_H });
+            }
+            else if (text == "chrome-dls")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.CONTROL, new[] { VirtualKeyCode.VK_J });
+            }
+            else if (text == "chrome-cleard")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.DELETE });
+            }
+            else if (text == "chrome-devt")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.VK_J });
+            }
+
+            else if (text == "chrome-feedback")
+            {
+                InputSimulator.SimulateModifiedKeyStroke(new[] { VirtualKeyCode.MENU, VirtualKeyCode.SHIFT }, new[] { VirtualKeyCode.VK_I });
+            }
+
+            //
+        }
+
+
+
+
+
     }
 }

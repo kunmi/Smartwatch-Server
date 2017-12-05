@@ -23,9 +23,14 @@ namespace Desktop_Server
             
             // Create a simple grammar that recognizes "red", "green", or "blue".
             Choices keySentences = new Choices();
-            keySentences.Add(new string[] { "go forward", "forward"});
-            keySentences.Add(new string[] { "back", "go back", "come back" });
-            keySentences.Add(new string[] { "stop", "wait", "come back" });
+            keySentences.Add(new string[] { "zoom in", "zoom in"});
+            keySentences.Add(new string[] { "zoom out", "zoom out" });
+            keySentences.Add(new string[] { "capture", "capture" });
+            keySentences.Add(new string[] { "remove", "remove" });
+
+            keySentences.Add(new string[] { "goto Germany" });
+            keySentences.Add(new string[] { "goto Nigeria" });
+
 
             // Create a GrammarBuilder object and append the Choices object.
             GrammarBuilder gb = new GrammarBuilder();
@@ -51,12 +56,36 @@ namespace Desktop_Server
 
         void SRE_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e)
         {
-            context.logmMssage("Speech recognized: Z" + e.Result.Text);
+            String capture = "capture";
+           
         }
         // Create a simple handler for the SpeechRecognized event.
         void sre_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            context.logmMssage("Speech recognized: " + e.Result.Text);
+            if (e.Result != null)
+            {
+                if (e.Result.Text.CompareTo("zoom in") == 0)
+                {
+                    KeyboardController.processGlobeAction("zoom in");
+                }
+                else if (e.Result.Text.CompareTo("zoom out") == 0)
+                {
+                    KeyboardController.processGlobeAction("zoom out");
+                }
+                else if (e.Result.Text.CompareTo("capture") == 0)
+                {
+                    KeyboardController.processGlobeAction("capture");
+                }
+                else if (e.Result.Text.CompareTo("remove") == 0)
+                {
+                    KeyboardController.processGlobeAction("remove");
+                }
+                else if (e.Result.Text.CompareTo("goto Germany") == 0)
+                {
+                    KeyboardController.processGlobeAction("Germany");
+                }
+                context.logmMssage("Speech recognized: " + e.Result.Text);
+            }
         }
     }
 }

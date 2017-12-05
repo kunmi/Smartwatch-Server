@@ -154,11 +154,6 @@ namespace Desktop_Server
                      }));
                  }
                  );
-
-
-
-
-           
             
         }
 

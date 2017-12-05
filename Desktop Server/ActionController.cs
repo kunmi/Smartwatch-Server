@@ -22,7 +22,8 @@ namespace Desktop_Server
             SPEECH,
             SCROLL,
             SHORTCUT,
-            DPAD
+            DPAD,
+            KEYPAD
         }
 
         JavaScriptSerializer serializer;
@@ -134,6 +135,13 @@ namespace Desktop_Server
                 {
                     String text = dynamicObject["values"];
                     KeyboardController.ProcessShortCuts(text.ToLower());
+                }
+
+                if (dynamicObject["type"] == DataType.KEYPAD.ToString())
+                {
+                    String text = dynamicObject["values"];
+                    KeyboardController.processGlobeAction(text);
+                    //KeyboardController.ProcessShortCuts(text.ToLower());
                 }
 
 
