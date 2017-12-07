@@ -182,7 +182,37 @@ namespace Desktop_Server
             }
             joystick.UpdateVJD(id, ref iReport);
         }
-       
+        public void PressButton3(String action)
+        {
+            if (action == "DOWN")
+            {
+                iReport.Buttons = (uint)(0x1 << 3);
+                //joystick.SetBtn(true, id, 1);
+            }
+
+            else if (action == "UP")
+            {
+                iReport.Buttons = (uint)(0x0 << 3);
+                //joystick.SetBtn(false, id, 1);
+            }
+            joystick.UpdateVJD(id, ref iReport);
+        }
+        public void PressButton4(String action)
+        {
+            if (action == "DOWN")
+            {
+                iReport.Buttons = (uint)(0x1 << 4);
+                //joystick.SetBtn(true, id, 1);
+            }
+
+            else if (action == "UP")
+            {
+                iReport.Buttons = (uint)(0x0 << 4);
+                //joystick.SetBtn(false, id, 1);
+            }
+            joystick.UpdateVJD(id, ref iReport);
+        }
+
 
         public void ReleaseController()
         {
