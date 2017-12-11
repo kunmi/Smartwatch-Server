@@ -148,6 +148,7 @@ namespace Desktop_Server
                 if (dynamicObject["type"] == DataType.TOUCH.ToString())
                 {
                     String action = dynamicObject["values"];
+                    String data = dynamicObject["id"];
 
                     if (Preference.ActiveMode == Preference.SUPPORTED_MODES.Mouse)
                     {
@@ -167,14 +168,20 @@ namespace Desktop_Server
                             else if (dynamicObject["id"] == "R")
                                 MouseController.RightUp();
                         }
+                        if (data == "LEFT")
+                            KeyboardController.simulateButton(VirtualKeyCode.LEFT, action);
+
+                        else if (data == "RIGHT")
+                            KeyboardController.simulateButton(VirtualKeyCode.RIGHT, action);
+
                     }
 
 
                     else if (Preference.ActiveMode == Preference.SUPPORTED_MODES.Keyboard)
                     {
-                        if (dynamicObject["id"] == "L")
+                        if (data == "L")
                             KeyboardController.simulateButton(VirtualKeyCode.RETURN, action);
-                        else if (dynamicObject["id"] == "R")
+                        else if (data == "R")
                             KeyboardController.simulateButton(VirtualKeyCode.ESCAPE, action);
                     }
 
@@ -185,7 +192,17 @@ namespace Desktop_Server
                             context.VJOY.PressButton1(action);
                         else if (dynamicObject["id"] == "R")
                             context.VJOY.PressButton2(action);
+
+                        else if (data == "LEFT")
+                            context.VJOY.operatePOV(Convert.ToUInt32(27000));
+
+                        else if (data == "RIGHT")
+                            context.VJOY.operatePOV(Convert.ToUInt32(9000));
+
+
                     }
+
+
                 }
                 
 

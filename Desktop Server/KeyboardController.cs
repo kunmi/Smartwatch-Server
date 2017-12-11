@@ -222,7 +222,7 @@ namespace Desktop_Server
             else if(action.ToLower() == "germany")
             {
                 InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_Q);
-                
+                Thread.Sleep(100);
                 InputSimulator.SimulateModifiedKeyStroke(VirtualKeyCode.LSHIFT, new[] { VirtualKeyCode.VK_3 });
                 Thread.Sleep(100);
                 InputSimulator.SimulateKeyPress(VirtualKeyCode.VK_G);
