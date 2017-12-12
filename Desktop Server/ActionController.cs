@@ -193,11 +193,11 @@ namespace Desktop_Server
                         else if (dynamicObject["id"] == "R")
                             context.VJOY.PressButton2(action);
 
-                        else if (data == "LEFT")
-                            context.VJOY.operatePOV(Convert.ToUInt32(27000));
+                        if (data == "LEFT")
+                            KeyboardController.simulateButton(VirtualKeyCode.LEFT, action);
 
                         else if (data == "RIGHT")
-                            context.VJOY.operatePOV(Convert.ToUInt32(9000));
+                            KeyboardController.simulateButton(VirtualKeyCode.RIGHT, action);
 
 
                     }

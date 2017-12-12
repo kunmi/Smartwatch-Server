@@ -133,18 +133,23 @@ namespace Desktop_Server
 
                 if (e.Result.Text == "enough")
                 {
+                    KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.UP, action_up);
+                    KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.DOWN, action_up);
+                    KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.LEFT, action_up);
+                    KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.RIGHT, action_up);
+                 
                     context.VJOY.operatePOV(0xFFFFFFFF);
                     context.VJOY.PressButton1(action_up);
                 }
 
                 if (e.Result.Text == "go higher")
                 {
-                    context.VJOY.operatePOV(Convert.ToUInt32(0));
+                        KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.UP, action_down);
                 }
 
                 if(e.Result.Text == "go lower")
                 {
-                    context.VJOY.operatePOV(Convert.ToUInt32(18000));
+                    KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.DOWN, action_down);
                 }
 
                 if (e.Result.Text == "bank left")
