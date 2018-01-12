@@ -16,9 +16,14 @@ namespace Desktop_Server
         String action_down = "DOWN";
         String action_up = "UP";
 
+
+        int duration = 3;
+        KeyboardController keyboardController = null;
+
         public SpeechHelper(MainWindow ctx) {
 
             context = ctx;
+            keyboardController = new KeyboardController(ctx);
         }
 
         public void initalizeEngine(){
@@ -29,7 +34,7 @@ namespace Desktop_Server
 
             Choices keySentences = new Choices();
 
-//            if()
+ 
             keySentences.Add(new string[] { "zoom in", "zoom in"});
             keySentences.Add(new string[] { "zoom out", "zoom out" });
             keySentences.Add(new string[] { "capture", "capture" });
@@ -37,6 +42,7 @@ namespace Desktop_Server
 
             keySentences.Add(new string[] { "goto Germany" });
             keySentences.Add(new string[] { "goto Nigeria" });
+
 
             keySentences.Add(new string[] { "go higher" });
             keySentences.Add(new string[] { "enough" });
@@ -47,7 +53,7 @@ namespace Desktop_Server
             keySentences.Add(new string[] { "bank left" });
             keySentences.Add(new string[] { "bank right" });
 
-
+ 
 
 
             // Create a GrammarBuilder object and append the Choices object.
@@ -142,25 +148,28 @@ namespace Desktop_Server
                     context.VJOY.PressButton1(action_up);
                 }
 
+
+
                 if (e.Result.Text == "go higher")
                 {
-                        KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.UP, action_down);
+                      keyboardController.simulatePressWithTimer(WindowsInput.VirtualKeyCode.UP, duration);
+                        //KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.UP, action_down);
                 }
 
                 if(e.Result.Text == "go lower")
                 {
-                    KeyboardController.simulateButton(WindowsInput.VirtualKeyCode.DOWN, action_down);
+                    keyboardController.simulatePressWithTimer(WindowsInput.VirtualKeyCode.DOWN, duration);
                 }
 
                 if (e.Result.Text == "bank left")
                 {
-                    context.VJOY.operatePOV(Convert.ToUInt32(27000));
+                    keyboardController.simulatePressWithTimer(WindowsInput.VirtualKeyCode.LEFT, duration);
                 }
 
 
                 if (e.Result.Text == "bank right")
                 {
-                    context.VJOY.operatePOV(Convert.ToUInt32(9000));
+                    keyboardController.simulatePressWithTimer(WindowsInput.VirtualKeyCode.RIGHT, duration);
                 }
             }
 

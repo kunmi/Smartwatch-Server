@@ -4,14 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Collections.Concurrent;
 //STEP 1
 using WindowsInput;
 
 
 namespace Desktop_Server
 {
+    
     class KeyboardController
     {
+
+        ConcurrentDictionary<String, int> timedKeys = new ConcurrentDictionary<string, int>();
+
+        MainWindow context = null;
+
+        public KeyboardController(MainWindow sender)
+        {
+            context = sender; 
+        }
+
 
         public static void PerformMovement(float x, float y)
         {
@@ -172,7 +184,50 @@ namespace Desktop_Server
         {
            InputSimulator.SimulateTextEntry(key);
         }
-        
+
+        public void simulatePressWithTimer(VirtualKeyCode key, int duration)
+        {
+           InputSimulator.SimulateKeyDown(key);
+
+            if (timedKeys.ContainsKey(key.ToString())) {
+     
+                if(timedKeys[key.ToString()]>=0)
+                {
+                    timedKeys[key.ToString()] += duration;
+                    return;
+                }
+                else
+                {
+                    timedKeys[key.ToString()] = duration;   
+                }
+            }
+            else
+            {
+                timedKeys.TryAdd(key.ToString(), duration);
+            }
+
+            context.logmMssage(key.ToString() + "  DOWN");
+            new Thread(() => {
+                    while((timedKeys[key.ToString()] > -1))
+                    {
+
+                    Thread.Sleep(1000);
+
+                    if (timedKeys[key.ToString()] > -1  )
+                        {
+                            timedKeys[key.ToString()]--;
+                        }
+
+                        
+                    }
+
+                context.logmMssage(key.ToString() + "  UP");
+                InputSimulator.SimulateKeyUp(key);
+
+                }).Start();
+           
+        }
+
 
         // EXPERIMENTAL
         //Only For Keys 

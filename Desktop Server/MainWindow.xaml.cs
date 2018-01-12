@@ -1,23 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using Desktop_Server;
-using System.Windows.Forms;
 using MahApps.Metro.Controls;
+
 
 namespace Desktop_Server
 {
@@ -26,6 +16,7 @@ namespace Desktop_Server
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+       
         const int PORT = 2407;
         bool isServerStarted = false;
         String ipAddress = "";
@@ -34,6 +25,7 @@ namespace Desktop_Server
         VJoyController vjoy;
         SpeechHelper speechMachine;
 
+    
         public VJoyController VJOY {
             get {
                 return vjoy;
@@ -239,9 +231,6 @@ namespace Desktop_Server
         {
             Preference.InvertAxis = true;
         }
-
-
-
 
     
     }
